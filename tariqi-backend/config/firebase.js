@@ -9,14 +9,19 @@ const getFirebaseAdmin = () => {
     return admin;
   }
 
-  if (!fs.existsSync(serviceAccountPath)) {
+  let serviceAccount;
+
+  if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
+    // Cloud deployment: read credentials from environment variable
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
+  } else if (fs.existsSync(serviceAccountPath)) {
+    // Local development: read credentials from JSON file
+    serviceAccount = require(serviceAccountPath);
+  } else {
     throw new Error(
-      `Missing Firebase service account file at ${serviceAccountPath}`,
+      "Missing Firebase credentials. Set FIREBASE_SERVICE_ACCOUNT_JSON env var or provide serviceAccountKey.json",
     );
   }
-
-  // Requiring the JSON keeps the setup simple and matches the local file workflow.
-  const serviceAccount = require(serviceAccountPath);
 
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
