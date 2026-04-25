@@ -51,6 +51,10 @@ app.get("/", (req, res) => {
   res.send("Tariqi backend is running");
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 if (require.main === module) {
   connectDB();
   const PORT = process.env.PORT || 3000;
