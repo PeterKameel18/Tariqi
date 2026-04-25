@@ -5,6 +5,8 @@
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB%20Atlas-darkgreen)
 ![License](https://img.shields.io/badge/License-ISC-lightgrey)
 
+**Live API:** https://tariqi-m9uw.onrender.com
+
 ## Demo
 
 | Login, Ride Creation & Search | Ride Request, Pickup, Drop-off & Live Chat |
