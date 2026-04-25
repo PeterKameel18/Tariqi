@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: tariqi-backend
+    runtime: node
+    plan: free
+    rootDir: tariqi-backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
